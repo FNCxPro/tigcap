@@ -49,9 +49,7 @@ let defaultConfig = {
   owoToken: "",
   owoUrl: "https://owo.whats-th.is/",
   shortcut: "CommandOrControl+Shift+C",
-  nothingdomains_key: "",
-  nothingdomains_vanity: "",
-  kuvien_key: ""
+  elixire_key: ""
 };
 
 let config;
@@ -120,10 +118,8 @@ app.on("will-quit", function() {
 
 const hostMap = {
   pomf: pomfUpload,
-  kuvien: kuvienUpload,
   srht: srhtUpload,
   owo: owoUpload,
-  nothingdomains: nothingDomainsUpload,
   elixire: elixireUpload
 };
 
@@ -160,27 +156,6 @@ async function srhtUpload(buffer) {
     .attach("file", buffer, "oof.png")
     .send({ key: config.srht_key });
   return res.body.url;
-}
-
-async function nothingDomainsUpload(buffer) {
-  let vanity = config.nothingdomains_vanity;
-  let res;
-  try {
-    res = await snekfetch
-      .post("https://nothing.domains/api/upload/pomf")
-      .attach("files[]", buffer, "oof.png")
-      .set({
-        Authorization: config.nothingdomains_key
-      });
-  } catch (e) {
-    console.log(e);
-  }
-  let body = res.body;
-  if (res.body instanceof Buffer) {
-    body = JSON.parse(res.body.toString("utf8"));
-  }
-  if (!body.success) throw "Unknown error";
-  return `${vanity}${body.files[0].url}`;
 }
 
 async function elixireUpload(buffer) {
@@ -241,13 +216,13 @@ async function owoUpload(buffer) {
   return url;
 }
 
-async function kuvienUpload(buffer) {
-  let res = await snekfetch
-    .post("https://api.kuvien.io/image/upload")
-    .set("X-App-Key", config.kuvien_key)
-    .attach("file", buffer, "oof.png");
-  return res.body.file.url;
-}
+// async function kuvienUpload(buffer) {
+//   let res = await snekfetch
+//     .post("https://api.kuvien.io/image/upload")
+//     .set("X-App-Key", config.kuvien_key)
+//     .attach("file", buffer, "oof.png");
+//   return res.body.file.url;
+// }
 
 app.on("window-all-closed", function() {
   // Ignore it

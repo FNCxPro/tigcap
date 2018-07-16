@@ -8,7 +8,6 @@ try {
   config = {
     img_host: "elixire",
     srht_url: "https://srht.example.org",
-    srht_key: "Example",
     pomf_host: [
       "https://pomf.example.org/",
       "https://pomf-vanity.example.org/"
@@ -16,7 +15,7 @@ try {
     owoToken: "",
     owoUrl: "https://owo.whats-th.is/",
     shortcut: "CommandOrControl+Shift+C",
-    kuvien_key: ""
+    elixire_key: ""
   };
 }
 
@@ -35,19 +34,8 @@ window.addEventListener("load", function() {
   var owo_token = document.getElementById("owo_token");
   var owo_url = document.getElementById("owo_url");
   var shortcut_text = document.getElementById("shortcut_text");
-  var nothingdomains_vanity = document.getElementById("nothingdomains_vanity");
-  var nothingdomains_key = document.getElementById("nothingdomains_key");
   var elixire_key = document.getElementById("elixire_key");
-  var kuvien_key = document.getElementById("kuvien_key");
 
-  nothingdomains_key.addEventListener("change", function() {
-    config.nothingdomains_key = this.value;
-    save();
-  });
-  nothingdomains_vanity.addEventListener("change", function() {
-    config.nothingdomains_vanity = this.value;
-    save();
-  });
   srht_url.addEventListener("change", function() {
     config.srht_url = this.value;
     save();
@@ -72,10 +60,6 @@ window.addEventListener("load", function() {
     config.owoUrl = this.value;
     save();
   });
-  kuvien_key.addEventListener("change", function() {
-    config.kuvien_key = this.value;
-    save();
-  });
   elixire_key.addEventListener("change", function() {
     config.elixire_key = this.value;
     save();
@@ -95,10 +79,7 @@ window.addEventListener("load", function() {
     body.classList = config.img_host;
     imgHostSelector.value = config.img_host;
     shortcut_text.value = config.shortcut || "CommandOrControl+Shift+C";
-    nothingdomains_key.value = config.nothingdomains_key;
-    nothingdomains_vanity.value = config.nothingdomains_vanity;
     elixire_key.value = config.elixire_key;
-    kuvien_key.value = config.kuvien_key;
     save();
   }
   window.reloadValues = reloadValues;
